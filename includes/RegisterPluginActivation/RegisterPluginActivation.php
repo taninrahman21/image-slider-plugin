@@ -14,6 +14,9 @@ class RegisterPluginActivation
     // Register the activation hook
     register_activation_hook(BPLCS_DIR . 'content-slider.php', [$this, 'content_slider_plugin_activate']);
 
+    // Create the slider table on plugin activation
+    register_activation_hook(BPLCS_DIR, [$this, 'create_slider_table']);
+
 
     // Hook to admin_init for redirection after activation
     add_action('admin_init', [$this, 'content_slider_plugin_redirect']);
@@ -35,4 +38,24 @@ class RegisterPluginActivation
       exit;
     }
   }
+
+  // Create the slider table on plugin activation 
+  function create_slider_table()
+  {
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'bplcs_content_slider';
+    $charset_collate = $wpdb->get_charset_collate();
+
+    $sql = "CREATE TABLE $table_name (
+    id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+    slide_url varchar(255) DEFAULT '' NOT NULL,
+    slide_type enum('file', 'url') DEFAULT 'url' NOT NULL,
+    PRIMARY KEY (id)
+) $charset_collate;";
+
+    require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+    dbDelta($sql);
+
+  }
+
 }

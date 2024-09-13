@@ -165,7 +165,7 @@ input:checked + .slider:before {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 20px;
+  margin-top: 20px;
 }
 #add-slide-btn {
   padding: 3px 40px;
@@ -191,13 +191,13 @@ input:checked + .slider:before {
 .slide-item {
   display: flex;
   justify-content: space-between;
-  text-align: center;
+  align-items: center;
   margin-bottom: 10px;
 }
 
 /* Slide Image */
 .slide-img {
-  width: 100%;
+  width: 80px;
   height: auto;
   margin-bottom: 10px;
   border-radius: 4px;
@@ -205,6 +205,10 @@ input:checked + .slider:before {
 }
 
 /* Edit and Delete Buttons */
+.slide-actions {
+  display: flex;
+}
+
 .edit-slide-btn,
 .delete-slide-btn {
   padding: 8px 12px;
@@ -231,4 +235,44 @@ input:checked + .slider:before {
 
 .delete-slide-btn:hover {
   background-color: #c82333;
+}
+
+/* Add slide Style */
+#add-slide-content,
+#edit-slide-content {
+  background-color: #fff;
+  padding: 10px 20px;
+  display: none;
+}
+
+#add-slide-content h3,
+#edit-slide-content h3 {
+  margin-bottom: 20px;
+}
+
+#add-slide-content form label,
+#edit-slide-content form label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+#add-slide-content form input[type="file"],
+#edit-slide-content form input[type="file"] {
+  margin-bottom: 20px;
+}
+#add-slide-content form input[type="url"],
+#edit-slide-content form input[type="url"] {
+  direction: ltr;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+#add-slide-content button {
+  margin-right: 10px;
+  margin-bottom: 20px;
+}
+.current-slide-img {
+  width: 50px;
+  height: 60px;
+  display: block;
 }
