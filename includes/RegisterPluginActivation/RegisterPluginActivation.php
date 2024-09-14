@@ -20,6 +20,7 @@ class RegisterPluginActivation
 
     // Hook to admin_init for redirection after activation
     add_action('admin_init', [$this, 'content_slider_plugin_redirect']);
+
   }
 
   // Set option for redirect on plugin activation
@@ -39,23 +40,5 @@ class RegisterPluginActivation
     }
   }
 
-  // Create the slider table on plugin activation 
-  function create_slider_table()
-  {
-    global $wpdb;
-    $table_name = $wpdb->prefix . 'bplcs_content_slider';
-    $charset_collate = $wpdb->get_charset_collate();
-
-    $sql = "CREATE TABLE $table_name (
-    id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-    slide_url varchar(255) DEFAULT '' NOT NULL,
-    slide_type enum('file', 'url') DEFAULT 'url' NOT NULL,
-    PRIMARY KEY (id)
-) $charset_collate;";
-
-    require_once ABSPATH . 'wp-admin/includes/upgrade.php';
-    dbDelta($sql);
-
-  }
 
 }

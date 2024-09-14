@@ -1,3 +1,6 @@
+<?php
+include 'functions.php';
+?>
 <div class="wrap">
 
   <!-- Slider Settings -->
@@ -5,14 +8,16 @@
     <div class="tab-container">
       <!-- Tab Buttons -->
       <ul class="tab-buttons">
-        <li class="tab active" data-tab="tab-slide">Slides</li>
+        <li class="tab active" data-tab="tab-all-slider">All Slider</li>
+        <li class="tab" data-tab="tab-slide">Slides</li>
         <li class="tab" data-tab="tab-settings">Settings</li>
-        <li class="tab" data-tab="tab-patterns">Patterns</li>
+        <li class="tab" data-tab="tab-generate-shortcode">Generate Shortcode</li>
       </ul>
       <?php
+      require_once BPLCS_DIR . '/includes/Pages/AllSlider.php';
       require_once BPLCS_DIR . '/includes/Pages/Slides.php';
       require_once BPLCS_DIR . '/includes/Pages/Settings.php';
-      require_once BPLCS_DIR . '/includes/Pages/CustomizedSettings.php';
+      require_once BPLCS_DIR . '/includes/Pages/GenerateShortcode.php';
       ?>
     </div>
 

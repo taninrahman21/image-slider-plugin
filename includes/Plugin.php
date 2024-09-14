@@ -27,6 +27,13 @@ class Plugin
     // Load Scripts and Styles in Backend
     add_action('admin_enqueue_scripts', array($this, 'enqueue_styles_scripts'));
 
+    // Load Scripts and Styles in Frontend
+    add_action('wp_enqueue_scripts', array($this, 'load_styles_scripts'));
+
+
+    // add_action('wp_ajax_update_slider_settings', 'update_slider_settings');
+    // add_action('wp_ajax_nopriv_update_slider_settings', 'update_slider_settings');
+
   }
 
   private function load_activation_class()
@@ -39,7 +46,8 @@ class Plugin
     new RegisterAdmin();
   }
 
-  private function load_register_shortcode_class() {
+  private function load_register_shortcode_class()
+  {
     new RegisterShortcode();
   }
 
@@ -56,8 +64,51 @@ class Plugin
       wp_enqueue_script('content-slider-jquery-scripts', BPLCS_URL . '/js/content-slider.js', ['jquery'], null, true);
       wp_enqueue_style('content-slider-admin-style', BPLCS_URL . '/css/admin.css');
       wp_enqueue_style('content-slider-jquery-style', BPLCS_URL . '/css/content_slider.css');
+
+      // wp_enqueue_script('slider-settings-ajax', BPLCS_URL . '/js/slider-settings.js', array('jquery'), null, true);
+
+      // Localize the AJAX URL for the script
+      // wp_localize_script('slider-settings-ajax', 'ajaxurl', admin_url('admin-ajax.php'));
     }
   }
 
+  public function load_styles_scripts() {
+    wp_enqueue_script('content-slider-jquery-scripts', BPLCS_URL . '/js/content-slider.js', ['jquery'], null, true);
+    wp_enqueue_script('content-slider-jquery-scripts-frontend', BPLCS_URL . '/js/frontent-slider.js', ['jquery'], null, true);
+    wp_enqueue_style('content-slider-jquery-style', BPLCS_URL . '/css/content_slider.css');
+  }
+
+
+  function update_slider_settings()
+  {
+    // Check for required POST data
+    if (isset($_POST['slider_type']) && isset($_POST['max_width']) && isset($_POST['transition_duration'])) {
+      $active_customized_slides = get_option('active_customized_slides', array());
+
+      // Check if required fields are available
+      if (!isset($_POST['slider_type']) || !isset($_POST['max_width']) || !isset($_POST['transition_duration']) || !isset($_POST['slider_height']) || !isset($_POST['controls_enabled']) || !isset($_POST['pagination_enabled'])) {
+        wp_send_json_error('Missing fields');
+        wp_die();
+      }
+      // Update the values with the new data from the request
+      $active_customized_slides['transition_type'] = sanitize_text_field($_POST['slider_type']);
+      $active_customized_slides['max_width'] = intval($_POST['max_width']);
+      $active_customized_slides['transition_duration'] = intval($_POST['transition_duration']);
+      $active_customized_slides['height'] = intval($_POST['slider_height']);
+      $active_customized_slides['controls_enabled'] = intval($_POST['controls_enabled']);
+      $active_customized_slides['pager_enabled'] = intval($_POST['pagination_enabled']);
+
+      // Save the updated settings
+      update_option('active_customized_slides', $active_customized_slides);
+
+      // Send a success response
+      wp_send_json_success('Settings updated');
+    } else {
+      wp_send_json_error('Missing data');
+    }
+
+    // Always exit in AJAX handlers
+    wp_die();
+  }
 
 }

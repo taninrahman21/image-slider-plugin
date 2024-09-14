@@ -161,13 +161,15 @@ input:checked + .slider:before {
 }
 
 /* Style for Add Slide Button */
-.add-slide-btn {
+.add-slide-btn,
+.add-new-slider-btn {
   display: flex;
   justify-content: center;
   align-items: center;
   margin-top: 20px;
 }
-#add-slide-btn {
+#add-slide-btn,
+#add-new-slider-btn {
   padding: 3px 40px;
   background-color: #0073aa;
   color: white;
@@ -273,6 +275,56 @@ input:checked + .slider:before {
 }
 .current-slide-img {
   width: 50px;
-  height: 60px;
+  height: 50px;
   display: block;
+}
+
+/* Slider Name Form */
+.slide-name-form {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.slide-name-form p {
+  font-size: 18px;
+}
+
+/* CSS for display copied text after click */
+.copy-shortcode {
+  position: relative; /* Needed to position the tooltip */
+  cursor: pointer;    /* To show it's clickable */
+}
+
+.tooltip {
+  visibility: hidden;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 4px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 100%; /* Position above the td */
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.5s;
+  width: 100px;
+}
+
+.tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #333 transparent transparent transparent;
+}
+
+/* Tooltip visible state */
+.copy-shortcode.show-tooltip .tooltip {
+  visibility: visible;
+  opacity: 1;
 }

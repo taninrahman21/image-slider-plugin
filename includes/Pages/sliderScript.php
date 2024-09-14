@@ -27,8 +27,83 @@
       $('#' + tabToShow).fadeIn();
     });
 
+    // Hide add-new-slider-section by default
+    $('#add-new-slider-section').hide();
+    $('#edit-slider-section').hide();
+    $('#edit-slider-form').hide();
+    $('#create-slider-form').hide();
+
+
+    $('#add-new-slider-btn').click(function (e) {
+      e.preventDefault();
+      $('#tab-all-slider').hide();
+      $('.tab').removeClass('active');
+      // After click active tab should 
+      $('#tab-slide').show();
+      $('li[data-tab="tab-slide"]').addClass('active');
+      $('#add-new-slider-section').show();
+      $('#create-slider-form').show();
+      $(this).closest('form').submit();
+
+
+      // Update active tab in localStorage
+      localStorage.setItem('activeTab', 'tab-slide');
+    });
+
+    $('.edit-slider-btn').click(function (e) {
+      e.preventDefault();
+      $('#tab-all-slider').hide();
+      $('.tab').removeClass('active');
+      // After click active tab should 
+      $('#tab-slide').show();
+      $('li[data-tab="tab-slide"]').addClass('active');
+      $('#add-new-slider-section').hide();
+      $('#edit-slider-section').show();
+      $('#create-slider-form').hide();
+      $('#edit-slider-form').show();
+      $(this).closest('form').submit();
+
+      // Update active tab in localStorage
+      localStorage.setItem('activeTab', 'tab-slide');
+      localStorage.setItem('section', 'edit-slider-section');
+      localStorage.setItem('form', 'edit-slider-form');
+    });
+
+    // Add logic to hide add-new-slider-section when returning to the "All Slider" tab
+    $('li[data-tab="tab-all-slider"]').click(function () {
+      $('#add-new-slider-section').hide(); // Hide the add-new-slider-section
+      $('#tab-all-slider').show(); // Show the "All Slider" content
+      $('#edit-slider-section').hide();
+      $('#edit-slider-form').hide();
+      $('#create-slider-form').hide();
+
+      // Update active tab in localStorage
+      localStorage.setItem('activeTab', 'tab-all-slider');
+      localStorage.removeItem('section');
+      localStorage.removeItem('form');
+    });
+
+    $('.copy-shortcode').click(function () {
+      // Get the shortcode from the data attribute
+      var shortcode = $(this).attr('data-shortcode');
+      // Create a temporary input element to hold the shortcode
+      var tempInput = $('<input>');
+      $('body').append(tempInput);
+      tempInput.val(shortcode).select();
+      // Copy the content to the clipboard
+      document.execCommand('copy');
+      // Remove the temporary input element
+      tempInput.remove();
+      // Show tooltip
+      var $tooltip = $(this).find('.tooltip');
+      $(this).addClass('show-tooltip');  // Add class to show the tooltip
+      // Hide tooltip after 2 seconds
+      setTimeout(function () {
+        $('.copy-shortcode').removeClass('show-tooltip'); // Hide tooltip
+      }, 1500);
+    });
     // Show the first tab content by default
-    $('#tab-slide').show();
+    let lastActiveTab = localStorage.getItem('activeTab') || 'tab-all-slider';
 
     $('#add-slide-btn').on('click', function () {
       $('#slides-list').hide();
@@ -39,7 +114,6 @@
 
     $('.edit-slide-btn').on('click', function (e) {
       e.preventDefault();
-      // Hide the slide list and show the edit slide form
 
       // Get the slide index from the clicked button
       const $form = $(this).closest('form');
@@ -55,7 +129,6 @@
       $('.current-slide-img').attr('src', currentImageUrl);
 
       $('#slides-list').hide();
-
     });
 
     $('#cancel-edit-slide-btn').on('click', function () {
@@ -99,6 +172,27 @@
 
     // Initialize the state of the inputs
     handleInputChange();
+
+    // Show the last active tab on page load
+    $('.tab').removeClass('active');
+    $('#' + lastActiveTab).show(); // Show the content of the last active tab
+    $('li[data-tab="' + lastActiveTab + '"]').addClass('active');
+
+    // Show the appropriate section if the last active tab was "tab-slide"
+    let lastSection = localStorage.getItem('section');
+    if (lastActiveTab === 'tab-slide' && lastSection) {
+      $('#' + lastSection).show(); // Show the last saved section (add or edit slider)
+    } else if (lastActiveTab === 'tab-slide') {
+      $('#add-new-slider-section').show(); // Default to showing add-new-slider-section
+    }
+
+    // Display The Form which is lastly active
+    let lastForm = localStorage.getItem('form');
+    if (lastActiveTab === 'tab-slide' && lastForm) {
+      $('#' + lastForm).show(); // Show the last saved section (add or edit slider)
+    } else if (lastActiveTab === 'tab-slide') {
+      $('#create-slider-form').show(); // Default to showing add-new-slider-section
+    }
 
   });
 </script>
