@@ -26,13 +26,29 @@ class RegisterShortcode
     if (!$atts['id']) {
       return "Content Slider ID is required";
     }
-    $frontend_slider = get_option('active_customized_slides');
-    $frontend_slides = $frontend_slider['slides'];
 
+    $all_slider_from_get_option = get_option("bplcs_all_sliders");
 
-    if ($atts['id'] != $frontend_slider['slider_id']) {
-      return "Content Slider is not found.";
+    $slider_to_display = null;
+
+    // Find the slider by ID
+    foreach ($all_slider_from_get_option as $slider) {
+      if ($slider['slider_id'] == $atts['id']) {
+        $slider_to_display = $slider;
+        break;
+      }
     }
+
+    if (!$slider_to_display) {
+      return "Slider not found";
+    }
+
+    
+
+    $frontend_slides = $slider_to_display["slides"];
+
+
+
     wp_enqueue_script('content-slider-jquery-script-frontend');
     wp_enqueue_style('content-slider-jquery-style-frontend');
 
@@ -40,5 +56,4 @@ class RegisterShortcode
     require_once 'FrontendSlider.php';
     return ob_get_clean();
   }
-
 }

@@ -1,4 +1,17 @@
 <!-- Slider Container -->
+<style>
+  .bx-wrapper {
+    height:
+      <?php print $slider_to_display['height'] . "px"; ?>
+      !important;
+  }
+
+  .bx-wrapper img {
+    height:
+      <?php print $slider_to_display['height'] . "px"; ?>
+      !important;
+  }
+</style>
 <div>
   <ul class="bxslider">
     <?php
@@ -12,7 +25,12 @@
 <script>
   jQuery(document).ready(function ($) {
     $(".bxslider").bxSlider({
-      controls: true,
+      mode: "<?php echo esc_js($slider_to_display['transition_type']); ?>",
+      controls: <?php echo $slider_to_display['controls_enabled'] ? 'true' : 'false'; ?>,
+      auto: <?php echo $slider_to_display['auto_slide'] ? 'true' : 'false'; ?>,
+      pager: <?php echo $slider_to_display['pager_enabled'] ? 'true' : 'false'; ?>,
+      pause: <?php echo esc_js($slider_to_display['auto_interval']); ?>,
+      speed: <?php echo esc_js($slider_to_display['transition_duration']); ?>,
       nextText: "Next",
       prevText: "Prev"
     });

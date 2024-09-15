@@ -3,7 +3,12 @@
   // This is jQuery Slider Plugin
   jQuery(document).ready(function ($) {
     $(".bxslider").bxSlider({
-      controls: true,
+      mode: "<?php echo esc_js($slider_to_edit_from_get_option['transition_type']); ?>",
+      controls: <?php echo $slider_to_edit_from_get_option['controls_enabled'] ? 'true' : 'false'; ?>,
+      auto: <?php echo $slider_to_edit_from_get_option['auto_slide'] ? 'true' : 'false'; ?>,
+      pager: <?php echo $slider_to_edit_from_get_option['pager_enabled'] ? 'true' : 'false'; ?>,
+      pause: <?php echo esc_js($slider_to_edit_from_get_option['auto_interval']); ?>,
+      speed: <?php echo esc_js($slider_to_edit_from_get_option['transition_duration']); ?>,
       nextText: "Next",
       prevText: "Prev"
     });
@@ -31,24 +36,23 @@
     $('#add-new-slider-section').hide();
     $('#edit-slider-section').hide();
     $('#edit-slider-form').hide();
-    $('#create-slider-form').hide();
 
 
-    $('#add-new-slider-btn').click(function (e) {
-      e.preventDefault();
-      $('#tab-all-slider').hide();
-      $('.tab').removeClass('active');
-      // After click active tab should 
-      $('#tab-slide').show();
-      $('li[data-tab="tab-slide"]').addClass('active');
-      $('#add-new-slider-section').show();
-      $('#create-slider-form').show();
-      $(this).closest('form').submit();
+    // $('#add-new-slider-btn').click(function (e) {
+    //   e.preventDefault();
+    //   $('#tab-all-slider').hide();
+    //   $('.tab').removeClass('active');
+    //   // After click active tab should 
+    //   $('#tab-slide').show();
+    //   $('li[data-tab="tab-slide"]').addClass('active');
+    //   $('#add-new-slider-section').show();
+    //   $('#edit-slider-form').show();
+    //   $(this).closest('form').submit();
 
 
-      // Update active tab in localStorage
-      localStorage.setItem('activeTab', 'tab-slide');
-    });
+    //   // Update active tab in localStorage
+    //   localStorage.setItem('activeTab', 'tab-slide');
+    // });
 
     $('.edit-slider-btn').click(function (e) {
       e.preventDefault();
@@ -59,7 +63,6 @@
       $('li[data-tab="tab-slide"]').addClass('active');
       $('#add-new-slider-section').hide();
       $('#edit-slider-section').show();
-      $('#create-slider-form').hide();
       $('#edit-slider-form').show();
       $(this).closest('form').submit();
 
@@ -75,7 +78,6 @@
       $('#tab-all-slider').show(); // Show the "All Slider" content
       $('#edit-slider-section').hide();
       $('#edit-slider-form').hide();
-      $('#create-slider-form').hide();
 
       // Update active tab in localStorage
       localStorage.setItem('activeTab', 'tab-all-slider');
@@ -191,7 +193,7 @@
     if (lastActiveTab === 'tab-slide' && lastForm) {
       $('#' + lastForm).show(); // Show the last saved section (add or edit slider)
     } else if (lastActiveTab === 'tab-slide') {
-      $('#create-slider-form').show(); // Default to showing add-new-slider-section
+      $('#edit-slider-form').show(); // Default to showing add-new-slider-section
     }
 
   });

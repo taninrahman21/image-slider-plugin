@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       "slides" => array(
         "https://img.freepik.com/free-photo/portrait-young-adult-listening-radio-transmission_23-2151063310.jpg?t=st=1726166591~exp=1726170191~hmac=4f98ad7252416f5a9e0dd28ff56700ca9fc3ae264c6c1fb0f785402ddb63f33d&w=740"
       ),
-      "transition_type" => "Fade",
+      "transition_type" => "fade",
       "max_width" => 500,
       "transition_duration" => 1000,
       "controls_enabled" => 1,
@@ -110,12 +110,6 @@ echo "</pre>";
                 <input type="hidden" name="form_action" value="delete_slider">
                 <input type="hidden" name="slider_index" value="<?= $index ?>">
                 <button type="submit" class="button button-danger">Delete</button>
-              </form>
-
-              <form method="POST" action="admin.php?page=content-slider" style="display:inline;">
-                <input type="hidden" name="form_action" value="delete_slider">
-                <input type="hidden" name="slider_id" value="<?= $slider['slider_id'] ?>">
-                <button type="submit" class="button button-secondary">Preview</button>
               </form>
 
             </td>

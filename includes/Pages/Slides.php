@@ -1,11 +1,11 @@
 <?php
 
-// echo "<pre>";
-// print_r($all_slider_from_get_option);
-// echo "</pre>";
 
 $all_slider_from_get_option = get_option("bplcs_all_sliders");
 
+// echo "<pre>";
+// print_r($slider_to_edit_from_get_option);
+// echo "</pre>";
 
 
 
@@ -53,9 +53,11 @@ $all_slider_from_get_option = get_option("bplcs_all_sliders");
             // Handle adding a slide
             $image_url = getUploadImageUrl();
             $slider_to_edit_from_get_option["slides"][] = $image_url;
-            $edit_slider_index = findSliderById($all_slider_from_get_option, $slider_id);
+            $edit_slider_index = findSliderById($all_slider_from_get_option, $slider_to_edit_from_get_option['slider_id']);
             $all_slider_from_get_option[$edit_slider_index] = $slider_to_edit_from_get_option;
-            update_option("bplcs_all_sliders", $all_slider_from_get_option); // Update the correct option
+
+            update_option("slider_to_edit", $slider_to_edit_from_get_option);
+            update_option("bplcs_all_sliders", $all_slider_from_get_option);
           } elseif ($_POST['form_action'] === 'delete_slide') {
             // Handle deleting a slide
             $slide_index = intval($_POST['slide_index']);
@@ -63,16 +65,21 @@ $all_slider_from_get_option = get_option("bplcs_all_sliders");
               unset($slider_to_edit_from_get_option['slides'][$slide_index]);
               // Re-index the array after deletion to maintain proper ordering
               $slider_to_edit_from_get_option['slides'] = array_values($slider_to_edit_from_get_option['slides']);
+              $edit_slider_index = findSliderById($all_slider_from_get_option, $slider_to_edit_from_get_option['slider_id']);
               $all_slider_from_get_option[$edit_slider_index] = $slider_to_edit_from_get_option;
-              update_option("bplcs_all_sliders", $all_slider_from_get_option); // Update the correct option
+
+              update_option("slider_to_edit", $slider_to_edit_from_get_option);
+              update_option("bplcs_all_sliders", $all_slider_from_get_option);
             }
           } elseif ($_POST['form_action'] === 'edit_slide') {
             // Handle editing a slide
             $slide_index = intval($_POST['slide_index']);
             $slider_to_edit_from_get_option["slides"][$slide_index] = getUploadImageUrl();
-            $edit_slider_index = findSliderById($all_slider_from_get_option, $slider_id);
+            $edit_slider_index = findSliderById($all_slider_from_get_option, $slider_to_edit_from_get_option['slider_id']);
             $all_slider_from_get_option[$edit_slider_index] = $slider_to_edit_from_get_option;
-            update_option("bplcs_all_sliders", $all_slider_from_get_option); // Update the correct option
+
+            update_option("slider_to_edit", $slider_to_edit_from_get_option);
+            update_option("bplcs_all_sliders", $all_slider_from_get_option);
           }
         }
       }
