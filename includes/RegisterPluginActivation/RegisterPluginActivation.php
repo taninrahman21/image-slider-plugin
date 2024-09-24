@@ -35,10 +35,9 @@ class RegisterPluginActivation
     // Check if the redirect is needed
     if (get_option('content_slider_plugin_do_redirect', false)) {
       delete_option('content_slider_plugin_do_redirect'); // Remove option to avoid repeated redirects
-      wp_redirect(admin_url('admin.php?page=content-slider'));
+      wp_redirect(admin_url('admin.php?page=getting_started'));
       exit;
     }
   }
-
 
 }

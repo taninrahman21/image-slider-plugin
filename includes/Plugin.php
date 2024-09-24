@@ -52,11 +52,6 @@ class Plugin
   {
     global $pagenow;
 
-
-    // Enqueue your custom script
-
-    // Enqueue your custom style
-
     if ("admin.php" == $pagenow) {
       wp_enqueue_script('content-slider-jquery-scripts', BPLCS_URL . '/js/content-slider.js', ['jquery'], null, true);
       wp_enqueue_style('content-slider-admin-style', BPLCS_URL . '/css/admin.css');

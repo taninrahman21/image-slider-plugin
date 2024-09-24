@@ -33,6 +33,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     update_option("bplcs_all_sliders", $all_slider_from_get_option);
   } elseif (isset($_POST['form_action']) && $_POST['form_action'] === 'delete_slider') {
     $slider_index = intval($_POST['slider_index']);
+    if ($slider_to_edit_from_get_option === $all_slider_from_get_option[$slider_index]) {
+      $slider_to_edit_from_get_option = array();
+      update_option("slider_to_edit", $slider_to_edit_from_get_option);
+    }
     unset($all_slider_from_get_option[$slider_index]);
     // Re-index the array after deletion to maintain proper ordering
     $all_slider_from_get_option = array_values($all_slider_from_get_option);
@@ -61,7 +65,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   if (isset($_POST['form_action']) && $_POST['form_action'] == "slider_name_form") {
     // Get the slider ID from the form
     $slider_id = intval($_POST['slider_id']);
-    $slider_to_edit_from_get_option["slider_name"] = sanitize_text_field($_POST['slider_name']);;
+    $slider_to_edit_from_get_option["slider_name"] = sanitize_text_field($_POST['slider_name']);
+    ;
     $edit_slider_index = findSliderById($all_slider_from_get_option, $slider_id);
     $all_slider_from_get_option[$edit_slider_index] = $slider_to_edit_from_get_option;
     update_option("bplcs_all_sliders", $all_slider_from_get_option); // Update the correct opti

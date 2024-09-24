@@ -31,11 +31,12 @@ class RegisterShortcode
 
     $slider_to_display = null;
 
-    // Find the slider by ID
-    foreach ($all_slider_from_get_option as $slider) {
-      if ($slider['slider_id'] == $atts['id']) {
-        $slider_to_display = $slider;
-        break;
+    if (isset($all_slider_from_get_option)) {
+      foreach ($all_slider_from_get_option as $slider) {
+        if ($slider['slider_id'] == $atts['id']) {
+          $slider_to_display = $slider;
+          break;
+        }
       }
     }
 
@@ -43,7 +44,7 @@ class RegisterShortcode
       return "Slider not found";
     }
 
-    
+
 
     $frontend_slides = $slider_to_display["slides"];
 
@@ -53,7 +54,7 @@ class RegisterShortcode
     wp_enqueue_style('content-slider-jquery-style-frontend');
 
     ob_start();
-    require_once 'FrontendSlider.php';
+    require 'FrontendSlider.php';
     return ob_get_clean();
   }
 }

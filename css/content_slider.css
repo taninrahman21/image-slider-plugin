@@ -105,18 +105,18 @@ ul.bxslider {
 }
 .bx-wrapper .bx-prev:hover,
 .bx-wrapper .bx-prev:focus {
-  background-position: 0 0;
+  background-position: center center;
 }
 .bx-wrapper .bx-next {
   right: 10px;
-  /* background: url("../images/next.png") no-repeat 0 0; */
   background-image: url("../images/next.png");
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: 20px 20px;
+  background-position: center center;
 }
 .bx-wrapper .bx-next:hover,
 .bx-wrapper .bx-next:focus {
-  background-position: -43px 0;
+  background-position: center center;
 }
 .bx-wrapper .bx-controls-direction a {
   position: absolute;

@@ -199,8 +199,8 @@ input:checked + .slider:before {
 
 /* Slide Image */
 .slide-img {
-  width: 80px;
-  height: auto;
+  width: 90px;
+  height: 80px;
   margin-bottom: 10px;
   border-radius: 4px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -292,7 +292,7 @@ input:checked + .slider:before {
 /* CSS for display copied text after click */
 .copy-shortcode {
   position: relative; /* Needed to position the tooltip */
-  cursor: pointer;    /* To show it's clickable */
+  cursor: pointer; /* To show it's clickable */
 }
 
 .tooltip {
@@ -327,4 +327,138 @@ input:checked + .slider:before {
 .copy-shortcode.show-tooltip .tooltip {
   visibility: visible;
   opacity: 1;
+}
+
+/* Getting Started Page Style */
+.content-slider-getting-started {
+  background: #f4f7fa;
+  padding: 30px;
+  border-radius: 12px;
+  max-width: 900px;
+  margin: 20px auto;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  font-family: "Arial", sans-serif;
+}
+
+/* Header Styling */
+.content-slider-getting-started h1 {
+  font-size: 32px;
+  color: #2c3e50;
+  margin-bottom: 15px;
+  text-align: center;
+  font-weight: 600;
+}
+
+/* Introduction Paragraph */
+.content-slider-getting-started p.intro {
+  font-size: 18px;
+  color: #34495e;
+  text-align: center;
+  margin-bottom: 25px;
+  line-height: 1.6;
+}
+
+/* Steps Container */
+.content-slider-getting-started .steps {
+  margin-bottom: 20px;
+}
+
+/* Steps Title */
+.content-slider-getting-started .steps h2 {
+  font-size: 24px;
+  color: black;
+  margin-top: 40px;
+  margin-bottom: 15px;
+  border-left: 4px solid #4527a4;
+  padding-left: 10px;
+  font-weight: 500;
+}
+
+/* Steps Paragraph */
+.content-slider-getting-started .steps p {
+  font-size: 16px;
+  color: #7f8c8d;
+  margin-bottom: 5px;
+  line-height: 1.8;
+  padding-left: 10px;
+}
+
+/* Images Styling */
+.view-screenshot {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.view-screenshot div {
+  margin-right: 10px;
+}
+.content-slider-getting-started img {
+  /* max-width: 100%; */
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  border: 1px solid #ecf0f1;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+  /* margin: 20px 0; */
+}
+
+/* Help Section Styling */
+.help-market-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px; /* Space between the two sections */
+  margin-top: 40px;
+}
+
+/* Each Section (Help and Market) */
+.help-section,
+.market-plugins-section {
+  background: #ecf0f1;
+  padding: 20px;
+  border-radius: 10px;
+  border-left: 4px solid #4527a4;
+  flex: 1; /* Ensure both sections take up equal width */
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+}
+
+/* Market Section Title */
+.market-plugins-section h2 {
+  color: black;
+  font-size: 22px;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+/* Market Section List */
+.market-plugins-section ul {
+  padding-left: 20px;
+}
+
+.market-plugins-section ul li {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.market-plugins-section ul li a {
+  color: #4527a4;
+  text-decoration: none;
+}
+
+.market-plugins-section ul li a:hover {
+  text-decoration: underline;
+}
+/* Button-Like Links (for instructions) */
+.content-slider-getting-started a.button-link {
+  display: inline-block;
+  background-color: #4527a4;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-weight: bold;
+  text-decoration: none;
+  margin-top: 20px;
+}
+
+.content-slider-getting-started a.button-link:hover {
+  background-color: #5134b3;
 }
